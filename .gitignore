@@ -7,3 +7,5 @@ dist/
 *.env
 .env
 *.csv
+*.duckdb
+init.sql
