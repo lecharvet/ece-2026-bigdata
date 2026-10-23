@@ -1,0 +1,46 @@
+== ETAPE 5 : users sans schema ==
+lignes brutes users: 101
+['uuid,username,name,sex,address,mail,birthdate', 'bdd640fb-0667-4ad1-9c80-317fa3b1799d,garzaanthony,Charles Garcia,M,"908 Jennifer Squares', 'Robinsonshire, KY 01352",helenpeterson@gmail.com,1935-09-26']
+users apres filtre UUID: 50
+== ETAPE 6 : parsing manuel orders ==
+orders: 2829 {'order_id': '2339ba19-2563-4cc3-8a97-ebf555d596af', 'user_id': 'bdd640fb-0667-4ad1-9c80-317fa3b1799d', 'date': '2020-01-01 00:02:17.891488+00:00', 'quantity': 4, 'product': 'drink'}
+== ETAPE 7 : reduceByKey vs groupByKey ==
+users: 50 | resultats identiques: True
+top5: [('72bb912d-7da6-4785-b63b-4dc3a559e463', 317), ('52828d80-44b5-41f7-97ac-6aa8bb2488a3', 303), ('2051acef-097a-4e10-b6fe-bc0e7ecddbaf', 301), ('9793b9b4-1374-4146-b2c5-bd89b70b3420', 289), ('0dde29a6-baa4-471a-9d24-67ac778eedb3', 285)]
+stage 9 collect at /home/onyxia/work/ece-2026-bigdata | shuffle write 0 read 6230
+stage 8 groupByKey at /home/onyxia/work/ece-2026-bigd | shuffle write 6230 read 0
+stage 7 collect at /home/onyxia/work/ece-2026-bigdata | shuffle write 0 read 2513
+stage 6 reduceByKey at /home/onyxia/work/ece-2026-big | shuffle write 2513 read 0
+== ETAPE 8 : dedoublonnage ==
+avant: 2829 apres: 2829
+== ETAPE 9 : join ==
+join: 2829
+[('f143262f', 'bread', 'f143262f-dc5c-4eed-8da0-365bf8'), ('f143262f', 'bread', 'f143262f-dc5c-4eed-8da0-365bf8')]
+leftOuterJoin sans user: 0
+== EX1 : aggregateByKey ==
+[('f143262f-dc5c-4eed-8da0-365bf89897b9', (4, 12, 3.0)), ('969b6662-0562-4059-968c-c69b1064005c', (12, 40, 3.33)), ('ce9e1a11-fcbb-4e59-bbdd-cf7c9c96e9ec', (85, 253, 2.98))]
+== EX2 : faux user ==
+commandes sans user: 1
+== EX3 : DataFrame groupBy ==
+== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[user_id#0], functions=[sum(quantity#1L)])
+   +- Exchange hashpartitioning(user_id#0, 200), ENSURE_REQUIREMENTS, [plan_id=11]
+      +- HashAggregate(keys=[user_id#0], functions=[partial_sum(quantity#1L)])
+         +- Scan ExistingRDD[user_id#0,quantity#1L]
+
+
+lineage RDD (reduceByKey):
+(2) PythonRDD[19] at collect at /home/onyxia/work/ece-2026-bigdata/spark_labs/rdd_part2.py:32 []
+ |  MapPartitionsRDD[14] at mapPartitions at PythonRDD.scala:170 []
+ |  ShuffledRDD[13] at partitionBy at NativeMethodAccessorImpl.java:0 []
+ +-(2) PairwiseRDD[12] at reduceByKey at /home/onyxia/work/ece-2026-bigdata/spark_labs/rdd_part2.py:30 []
+    |  PythonRDD[11] at reduceByKey at /home/onyxia/work/ece-2026-bigdata/spark_labs/rdd_part2.py:30 []
+    |  PythonRDD[8] at RDD at PythonRDD.scala:58 []
+    |      CachedPartitions: 2; MemorySize: 168.0 KiB; DiskSize: 0.0 B
+    |  orders.csv MapPartitionsRDD[3] at textFile at NativeMethodAccessorImpl.java:0 []
+    |  orders.csv HadoopRDD[2] at textFile at NativeMethodAccessorImpl.java:0 []
+DataFrame identique: True
+== EX4 : cache ==
+sans cache: [0.251, 0.498, 0.255]
+avec cache: [0.381, 0.158, 0.19]
