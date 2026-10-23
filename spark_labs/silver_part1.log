@@ -1,0 +1,41 @@
+nohup: ignoring input
+WARNING: Using incubator modules: jdk.incubator.vector
+:: loading settings :: url = jar:file:/usr/local/lib/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/onyxia/.ivy2.5.2/cache
+The jars for the packages stored in: /home/onyxia/.ivy2.5.2/jars
+org.apache.iceberg#iceberg-spark-runtime-4.1_2.13 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-b3c1441b-7657-4973-a92d-76acb57cea4f;1.0
+	confs: [default]
+	found org.apache.iceberg#iceberg-spark-runtime-4.1_2.13;1.11.0 in central
+downloading https://repo1.maven.org/maven2/org/apache/iceberg/iceberg-spark-runtime-4.1_2.13/1.11.0/iceberg-spark-runtime-4.1_2.13-1.11.0.jar ...
+	[SUCCESSFUL ] org.apache.iceberg#iceberg-spark-runtime-4.1_2.13;1.11.0!iceberg-spark-runtime-4.1_2.13.jar (1605ms)
+:: resolution report :: resolve 1261ms :: artifacts dl 1612ms
+	:: modules in use:
+	org.apache.iceberg#iceberg-spark-runtime-4.1_2.13;1.11.0 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   1   |   1   |   1   |   0   ||   1   |   1   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-b3c1441b-7657-4973-a92d-76acb57cea4f
+	confs: [default]
+	1 artifacts copied, 0 already retrieved (46835kB/51ms)
+## ETAPE 3 : bronze
+## users: 50 orders: 2829
+## users cols: ['uuid', 'username', 'name', 'sex', 'address', 'mail', 'birthdate'] | orders cols: ['uuid', 'user_uuid', 'date', 'quantity', 'product']
+## ETAPE 4 : silver users
+## stg_users: 50 | city null: 0 | zip null: 0
+## ('bdd640fb-0667-4ad1-9c80-317fa3b1799d', 'garzaanthony', 'Charles Garcia', 'M', 'helenpeterson@gmail.com', datetime.date(1935, 9, 26), '908 Jennifer Squares', 'Robinsonshire', 'KY', '01352')
+## ('17be3111-1a2a-43ed-962b-0f79c37459ee', 'blairamanda', 'Ryan Munoz', 'M', 'stanleykendra@gmail.com', datetime.date(2009, 12, 22), 'Unit 6184 Box 9593', 'DPO', 'AP', '09617')
+## ETAPE 5 : silver orders + doublons simules
+## orders: 2829 avec doublons: 2832 apres dedup: 2829
+## DataFrame == SQL: True
+## ETAPE 6 : parquet
+## relu users: 50 orders: 2829
+## ETAPE 7 : iceberg
+## stg_users snapshot (6944984135477343430, 'overwrite', datetime.datetime(2026, 10, 23, 16, 16, 30, 580000))
+## stg_users file 00000-47-abffb359-a90c-410d-a98f-38b883a0975b-0-00001.parquet 50
+## stg_orders snapshot (592405958112264506, 'overwrite', datetime.datetime(2026, 10, 23, 16, 16, 33, 89000))
+## stg_orders file 00000-51-8f18e993-9c01-4dea-8786-5b74109df48b-0-00001.parquet 2829
+## DONE
