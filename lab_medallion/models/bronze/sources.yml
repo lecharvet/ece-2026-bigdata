@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: bronze
+    description: "Raw CSV files in the S3 bronze layer"
+    tables:
+      - name: users
+        config:
+          meta:
+            external_location: "read_csv('s3://{{ env_var('LAB_BUCKET_NAME') }}/bronze/{name}.csv', strict_mode = false)"
+      - name: orders
+        config:
+          meta:
+            external_location: "read_csv('s3://{{ env_var('LAB_BUCKET_NAME') }}/bronze/{name}.csv', strict_mode = false)"
