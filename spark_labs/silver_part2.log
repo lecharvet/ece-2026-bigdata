@@ -1,0 +1,39 @@
+nohup: ignoring input
+WARNING: Using incubator modules: jdk.incubator.vector
+:: loading settings :: url = jar:file:/usr/local/lib/spark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+Ivy Default Cache set to: /home/onyxia/.ivy2.5.2/cache
+The jars for the packages stored in: /home/onyxia/.ivy2.5.2/jars
+org.apache.iceberg#iceberg-spark-runtime-4.1_2.13 added as a dependency
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-9390706a-89db-495b-8d13-a8c7981a0ffa;1.0
+	confs: [default]
+	found org.apache.iceberg#iceberg-spark-runtime-4.1_2.13;1.11.0 in central
+:: resolution report :: resolve 316ms :: artifacts dl 5ms
+	:: modules in use:
+	org.apache.iceberg#iceberg-spark-runtime-4.1_2.13;1.11.0 from central in [default]
+	---------------------------------------------------------------------
+	|                  |            modules            ||   artifacts   |
+	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+	---------------------------------------------------------------------
+	|      default     |   1   |   0   |   0   |   0   ||   1   |   0   |
+	---------------------------------------------------------------------
+:: retrieving :: org.apache.spark#spark-submit-parent-9390706a-89db-495b-8d13-a8c7981a0ffa
+	confs: [default]
+	0 artifacts copied, 1 already retrieved (0kB/32ms)
+## EX1 : birthdate_is_valid
+## DataFrame API - invalides: 5
+## Spark SQL     - invalides: 5
+## EX2 : zip UDF vs pandas_udf vs regexp_extract (10000 lignes)
+## python_udf [3.623, 1.265, 0.772]
+## regexp_extract [0.946, 0.565, 0.693]
+## pandas_udf [2.592, 0.717, 0.724]
+## EX3 : cache bronze
+## sans cache: [0.511, 0.327, 0.446]
+## avec cache: [1.241, 0.256, 0.238]
+## storage: FileScan csv [uuid#182,user_uuid#183,date#184,quan | memoire 230176 o | partitions en cache 1
+## EX4 : iceberg append + time travel
+## avant: 2829 | snapshots: 1
+## apres: 2830 | snapshots: 2
+## snapshot (592405958112264506, 'overwrite', '2829')
+## snapshot (7658493963693385893, 'append', '1')
+## VERSION AS OF 592405958112264506 : 2829 | version courante: 2830
+## DONE
