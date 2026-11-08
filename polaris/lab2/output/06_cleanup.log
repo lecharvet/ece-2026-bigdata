@@ -1,0 +1,10 @@
+## Polaris principal: dev
+## fs.s3.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+## DROP silver.users: OK, 0 row(s)
+## DROP gold.orders_by_product: OK, 0 row(s)
+## DROP NAMESPACE gold: OK, 0 row(s)
+## SHOW NAMESPACES IN polaris: OK, 1 row(s)
+##    ('silver',)
+## SHOW TABLES IN polaris.silver: OK, 1 row(s)
+##    ('silver', 'orders', False)
+## DONE

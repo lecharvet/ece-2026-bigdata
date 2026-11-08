@@ -1,0 +1,11 @@
+## create catalog role silver_reader: 201
+## grant NAMESPACE_LIST on namespace silver: 201
+## grant TABLE_LIST on namespace silver: 201
+## grant NAMESPACE_READ_PROPERTIES on namespace silver: 201
+## grant TABLE_READ_PROPERTIES on namespace silver: 201
+## grant TABLE_READ_DATA on namespace silver: 201
+## create principal role silver_analyst: 201
+## grant silver_reader to silver_analyst: 201
+## principal silver_tester created, credential appended to ~/.polaris-credentials.env
+## assign silver_analyst to silver_tester: 201
+## silver_reader grants: ["NAMESPACE_LIST","TABLE_LIST","NAMESPACE_READ_PROPERTIES","TABLE_READ_PROPERTIES","TABLE_READ_DATA"]

@@ -1,0 +1,7 @@
+## Polaris principal: dev
+## fs.s3.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+## orders snapshots: OK, 1 row(s)
+##    (8106780798736354479, 'overwrite', datetime.datetime(2026, 11, 8, 12, 45, 41, 273000))
+## count polaris.silver.orders: OK, 1 row(s)
+##    (2829,)
+## DONE

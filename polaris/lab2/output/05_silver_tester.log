@@ -1,0 +1,11 @@
+## Polaris principal: silver_tester
+## fs.s3.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+## SHOW TABLES IN polaris.silver: OK, 2 row(s)
+##    ('silver', 'orders', False)
+##    ('silver', 'users', False)
+## read silver.orders: OK, 1 row(s)
+##    (2829,)
+## SHOW TABLES IN polaris.gold: ERROR Py4JJavaError: An error occurred while calling o86.sql. : org.apache.iceberg.exceptions.ForbiddenException: Forbidden: Principal 'silver_tester' with activated PrincipalRoles '[silver_analyst]' and activated grants via '[silver_analyst, silver_reader]' is not authorized for op LIST_TABLES at org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:345) at org.apache.iceberg.rest.ErrorH
+## read gold.orders_by_product: ERROR Py4JJavaError: An error occurred while calling o86.sql. : org.apache.iceberg.exceptions.ForbiddenException: Forbidden: Principal 'silver_tester' with activated PrincipalRoles '[silver_analyst]' and activated grants via '[silver_analyst, silver_reader]' is not authorized for op LOAD_TABLE at org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:345) at org.apache.iceberg.rest.ErrorHa
+## write silver.orders: ERROR Py4JJavaError: An error occurred while calling o86.sql. : org.apache.iceberg.exceptions.ForbiddenException: Forbidden: Principal 'silver_tester' with activated PrincipalRoles '[silver_analyst]' and activated grants via '[silver_analyst, silver_reader]' is not authorized for op ADD_TABLE_SNAPSHOT at org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:345) at org.apache.iceberg.rest
+## DONE

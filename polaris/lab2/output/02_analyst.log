@@ -1,0 +1,15 @@
+## Polaris principal: analyst
+## fs.s3.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+## SHOW TABLES IN polaris.silver: OK, 2 row(s)
+##    ('silver', 'orders', False)
+##    ('silver', 'users', False)
+## orders by product: OK, 6 row(s)
+##    ('cookie', 466)
+##    ('drink', 484)
+##    ('bread', 458)
+##    ('brioche', 468)
+##    ('donut', 462)
+##    ('croissant', 491)
+## INSERT as analyst: ERROR Py4JJavaError: An error occurred while calling o86.sql. : org.apache.iceberg.exceptions.ForbiddenException: Forbidden: Principal 'analyst' with activated PrincipalRoles '[data_analyst]' and activated grants via '[data_analyst, catalog_reader]' is not authorized for op ADD_TABLE_SNAPSHOT at org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:345) at org.apache.iceberg.rest.ErrorHan
+## ALTER as analyst: ERROR Py4JJavaError: An error occurred while calling o86.sql. : org.apache.iceberg.exceptions.ForbiddenException: Forbidden: Principal 'analyst' with activated PrincipalRoles '[data_analyst]' and activated grants via '[data_analyst, catalog_reader]' is not authorized for op ADD_TABLE_SCHEMA at org.apache.iceberg.rest.ErrorHandlers$DefaultErrorHandler.accept(ErrorHandlers.java:345) at org.apache.iceberg.rest.ErrorHandl
+## DONE

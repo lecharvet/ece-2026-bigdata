@@ -1,0 +1,7 @@
+## Polaris principal: dev
+## fs.s3.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+## lab.silver.users count: OK, 1 row(s)
+##    (50,)
+## lab.silver.orders count/quantity: OK, 1 row(s)
+##    (2829, 8615)
+## DONE
